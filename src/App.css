@@ -41,6 +41,7 @@ input, select {
   padding: 12px;
   font-size: 1.1rem;
   background: #f9f9f9;
+  color: #111; /* <-- Asegura texto negro */
   transition: border 0.2s;
 }
 

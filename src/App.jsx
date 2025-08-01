@@ -16,32 +16,34 @@ function App() {
   const [numerosUsados, setNumerosUsados] = useState([])
   const [apodosUsados, setApodosUsados] = useState([])
 
-  useEffect(() => {
-    async function fetchRemeras() {
-      const { data, error } = await supabase.from('remeras').select('nombre, numero, apodo')
-      if (!error && data) {
-        setNombresUsados(data.map(r => r.nombre?.toLowerCase()))
-        setNumerosUsados(data.map(r => r.numero))
-        setApodosUsados(data.map(r => r.apodo?.toUpperCase()))
-      }
+ useEffect(() => {
+  async function fetchRemeras() {
+    const { data, error } = await supabase.from('remeras').select('nombre, numero, apodo')
+    if (!error && data) {
+      setNombresUsados(data.map(r => r.nombre?.toUpperCase()))
+      setNumerosUsados(data.map(r => r.numero))
+      setApodosUsados(data.map(r => r.apodo?.toUpperCase()))
     }
-    fetchRemeras()
-  }, [])
+  }
+  fetchRemeras()
+}, [])
 
   const numerosDisponibles = Array.from({ length: 100 }, (_, i) => i).filter(n => !numerosUsados.includes(n))
 
   function validar() {
-    const apodoUpper = apodo.toUpperCase()
-    if (!nombre) return setError('El nombre es obligatorio')
-    if (nombresUsados.includes(nombre.toLowerCase())) return setError('NOMBRE YA UTILIZADO')
-    if (!numero) return setError('El número es obligatorio')
-    if (!apodo) return setError('El apodo es obligatorio')
-    if (!/^EL |^LA /.test(apodoUpper)) return setError('El apodo debe comenzar con "El" o "La"')
-    if (apodoUpper.length < 5 || apodoUpper.length > 25) return setError('El apodo debe tener entre 5 y 25 caracteres')
-    if (apodosUsados.includes(apodoUpper)) return setError('Apodo ya utilizado')
-    setError('')
-    return true
-  }
+  const nombreUpper = nombre.toUpperCase()
+  const apodoUpper = apodo.toUpperCase()
+  if (!nombre) return setError('El nombre es obligatorio')
+  if (nombre.trim().split(/\s+/).length < 2) return setError('El nombre debe tener nombre y apellido')
+  if (nombresUsados.includes(nombreUpper)) return setError('NOMBRE YA UTILIZADO')
+  if (!numero) return setError('El número es obligatorio')
+  if (!apodo) return setError('El apodo es obligatorio')
+  if (!/^EL |^LA /.test(apodoUpper)) return setError('El apodo debe comenzar con "El" o "La"')
+  if (apodoUpper.length < 5 || apodoUpper.length > 25) return setError('El apodo debe tener entre 5 y 25 caracteres')
+  if (apodosUsados.includes(apodoUpper)) return setError('Apodo ya utilizado')
+  setError('')
+  return true
+}
 
   async function handleSubmit(e) {
     e.preventDefault()
