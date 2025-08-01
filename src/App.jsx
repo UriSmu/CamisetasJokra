@@ -28,7 +28,7 @@ function App() {
   fetchRemeras()
 }, [])
 
-  const numerosDisponibles = Array.from({ length: 100 }, (_, i) => i).filter(n => !numerosUsados.includes(n))
+  const numerosDisponibles = Array.from({ length: 100 }, (_, i) => i).filter(n => !numerosUsados.includes(n) && n !== 88)
 
   function validar() {
   const nombreUpper = nombre.toUpperCase()
