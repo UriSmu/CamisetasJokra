@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import './App.css'
-
+/*
 const supabaseUrl = 'https://nyfiozihqkrjhqcefqhd.supabase.co'
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
@@ -134,6 +134,37 @@ function App() {
         <button type="submit">Enviar</button>
         {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
       </form>
+    </div>
+  )
+}
+
+export default App
+*/
+
+function App() {
+  return (
+    <div
+      style={{
+        minHeight: '80vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <h1
+        style={{
+          background: '#fff',
+          color: 'black',
+          padding: '32px 40px',
+          borderRadius: '18px',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.10)',
+          margin: 0,
+          fontSize: '2em'
+        }}
+      >
+        EL FORMULARIO ESTÁ CERRADO, YA NO SE PUEDEN PEDIR CAMISETAS.
+      </h1>
     </div>
   )
 }
